@@ -6,20 +6,44 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+
     <!--
     <bean id="myClassName"
           class="ru.denris.springapp.MyClassName">
-        <constructor-arg value="Neil"/>
+        <constructor-arg value="Value of arg"/>
     </bean>
     -->
-    <bean id="musicBean"
+    <bean id="rockMusicBean"
           class="ru.denris.springapp.RockMusic">
-
+    </bean>
+    <bean id="classicalMusicBean"
+          class="ru.denris.springapp.ClassicalMusic">
+    </bean>
+    <bean id="popMusicBean"
+          class="ru.denris.springapp.PopMusic">
     </bean>
 
     <bean id="musicPlayer"
           class="ru.denris.springapp.MusicPlayer">
-        <constructor-arg ref="musicBean"/>
+        <!--<constructor-arg ref="musicBean"/>--><!--аргументы конструктора -->
+        <!--<property name="music" ref="rockMusicBean"/> -->  <!--это сеттер     setMusic-music     -->
+        <property name="musicList">
+            <list>
+                <ref bean="rockMusicBean"/>
+                <ref bean="classicalMusicBean"/>
+                <ref bean="popMusicBean"/>
+            </list>
+        </property>
+
+        <!--<property name="name" value="My music player"/> -->
+        <!--<property name="volume" value="50"/> -->
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicOlayer.volume}"/>
+
+
     </bean>
 
 </beans>
