@@ -25,7 +25,7 @@ public class MusicPlayer {
         this.volume = volume;
     }
 
-    public void setMusic(List<Music> musicList) {
+    public void setMusicList(List<Music> musicList) {
         this.musicList = musicList;
     }
 
@@ -43,4 +43,12 @@ public class MusicPlayer {
         }
     }
 
+    //любой модификатор доступа
+    private void doingPostCreate(){
+        System.out.println("Doing MusicPlayer post-creation");
+    }
+    //вызывается только у singleton
+    private void doingPreDestroy(){
+        System.out.println("Doing MusicPlayer pre-destroying");
+    }
 }

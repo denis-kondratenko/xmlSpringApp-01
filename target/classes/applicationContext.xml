@@ -17,17 +17,23 @@
     </bean>
     -->
     <bean id="rockMusicBean"
-          class="ru.denris.springapp.RockMusic">
+          class="ru.denris.springapp.RockMusic"
+          scope="prototype">
     </bean>
     <bean id="classicalMusicBean"
-          class="ru.denris.springapp.ClassicalMusic">
+          class="ru.denris.springapp.ClassicalMusic"
+          scope="prototype"
+          factory-method="getClassicalMusic">
     </bean>
     <bean id="popMusicBean"
           class="ru.denris.springapp.PopMusic">
     </bean>
 
     <bean id="musicPlayer"
-          class="ru.denris.springapp.MusicPlayer">
+          class="ru.denris.springapp.MusicPlayer"
+          scope="singleton"
+          init-method="doingPostCreate"
+          destroy-method="doingPreDestroy">
         <!--<constructor-arg ref="musicBean"/>--><!--аргументы конструктора -->
         <!--<property name="music" ref="rockMusicBean"/> -->  <!--это сеттер     setMusic-music     -->
         <property name="musicList">
@@ -35,6 +41,8 @@
                 <ref bean="rockMusicBean"/>
                 <ref bean="classicalMusicBean"/>
                 <ref bean="popMusicBean"/>
+                <ref bean="rockMusicBean"/>
+                <ref bean="classicalMusicBean"/>
             </list>
         </property>
 
